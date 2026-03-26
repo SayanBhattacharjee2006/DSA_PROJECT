@@ -55,7 +55,6 @@ class Node{
         Node(const Contact &val):val(val),next(nullptr),prev(nullptr){}
 };
 
-
 class Group{
     private:
         string groupName;
@@ -115,7 +114,6 @@ class Group{
     }
        
 };
-
 
 class ContactManager{
     private:
@@ -431,7 +429,6 @@ class ContactManager{
         }
 };
 
-
 class currentLoggedInUser{
     string userName, userNumber, userEmail, userAddress;
     ContactManager contactManager;
@@ -537,7 +534,6 @@ public:
 
 };
 
-
 int main(){
     cout<<"                     -----PHONE DICTIONARY APPLICATION-----"<<endl;
     string userName, userNumber, userEmail, userAddress;
@@ -576,8 +572,8 @@ int main(){
         int choice;
         cout<<"Enter your choice: ";
         cin>>choice;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 🔥 FIX
-
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        cout<<"\n\n";
         switch(choice){
             case 1: {
                 string name, number, email, address;
@@ -598,7 +594,7 @@ int main(){
                 int updateChoice;
                 cout<<"Update by: 1. Name 2. Number"<<endl;
                 cin>>updateChoice;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 🔥 FIX
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
 
                 if(updateChoice == 1){
                     string name, email, address;
