@@ -15,7 +15,7 @@ private:
     string number;
     string email;
     string address;
-
+    //can not change the name and number as they are used in contactMap and phoneMap as a key for indexing
 public:
     Contact(string name, string number, string email = "", string address = ""):name(name),number(number),email(email),address(address){}
 
@@ -26,8 +26,6 @@ public:
     string getAddress() { return this->address; }
 
     // setter functions
-
-
     void setEmail(string email){
         this->email = email;
     }
@@ -125,9 +123,9 @@ class ContactManager{
         Node *tail;
         int contactsCount;
 
-        unordered_map<string, Node *> contactMap;
-        unordered_map<string, Node *> phoneMap;
-        unordered_map<string, Group*> groupMap;
+        unordered_map<string, Node *> contactMap; //used to search contact by name
+        unordered_map<string, Node *> phoneMap; // used to search contact by number
+        unordered_map<string, Group*> groupMap; // used to search group by name
 
     public:
 
@@ -564,7 +562,7 @@ int main(){
         cout<<"1. Add Contact"<<endl;
         cout<<"2. Update Contact"<<endl;
         cout<<"3. Delete Contact"<<endl;
-        cout<<"4. create Group"<<endl;
+        cout<<"4. Create Group"<<endl;
         cout<<"5. Delete Group"<<endl;
         cout<<"6. Add Contact to Group"<<endl;
         cout<<"7. Remove Contact from Group"<<endl;
@@ -577,7 +575,8 @@ int main(){
 
         int choice;
         cout<<"Enter your choice: ";
-        cin>>choice; // Clear the input buffer
+        cin>>choice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 🔥 FIX
 
         switch(choice){
             case 1: {
@@ -594,10 +593,13 @@ int main(){
                 user.addContact(name, number, email, address);
                 break;
             }
+
             case 2: {
                 int updateChoice;
                 cout<<"Update by: 1. Name 2. Number"<<endl;
-                cin>>updateChoice; // Clear the input buffer
+                cin>>updateChoice;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 🔥 FIX
+
                 if(updateChoice == 1){
                     string name, email, address;
                     cout<<"Enter contact name to update: ";
@@ -621,10 +623,13 @@ int main(){
                 }
                 break;
             }
+
             case 3: {
                 int deleteChoice;
                 cout<<"Delete by: 1. Name 2. Number"<<endl;
                 cin>>deleteChoice;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 🔥 FIX
+
                 if(deleteChoice == 1){
                     string name;
                     cout<<"Enter contact name to delete: ";
@@ -640,6 +645,7 @@ int main(){
                 }
                 break;
             }
+
             case 4: {
                 string groupName, groupDescription;
                 cout<<"Enter group name: ";
@@ -649,6 +655,7 @@ int main(){
                 user.createGroup(groupName, groupDescription);
                 break;
             }
+
             case 5: {
                 string groupName;
                 cout<<"Enter group name to delete: ";
@@ -656,6 +663,7 @@ int main(){
                 user.deleteGroup(groupName);
                 break;
             }
+
             case 6: {
                 string name, groupName;
                 cout<<"Enter contact name to add to group: ";
@@ -665,6 +673,7 @@ int main(){
                 user.addContactToGroup(name, groupName);
                 break;
             }
+
             case 7: {
                 string name, groupName;
                 cout<<"Enter contact name to remove from group: ";
@@ -674,10 +683,13 @@ int main(){
                 user.removeContactFromGroup(name, groupName);
                 break;
             }
+
             case 8: {
                 int displayChoice;
                 cout<<"Display by: 1. Name 2. Number"<<endl;
                 cin>>displayChoice;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 🔥 FIX
+
                 if(displayChoice == 1){
                     string name;
                     cout<<"Enter contact name to display details: ";
@@ -693,10 +705,13 @@ int main(){
                 }
                 break;
             }
+
             case 9: {
                 int orderChoice;
                 cout<<"Display order: 1. Newest Last 2. Newest First"<<endl;
                 cin>>orderChoice;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 🔥 FIX
+
                 cout<<"\nDisplaying all contacts:"<<endl;
                 if(orderChoice == 1){
                     user.displayAllContacts(1);
@@ -707,6 +722,7 @@ int main(){
                 }
                 break;
             }
+
             case 10: {
                 string groupName;
                 cout<<"Enter group name to display details: ";
@@ -714,6 +730,7 @@ int main(){
                 user.displayGroupDetails(groupName);
                 break;
             }
+
             case 11: {
                 string groupName;
                 cout<<"Enter group name to display members: ";
@@ -721,18 +738,22 @@ int main(){
                 user.displayGroupMembers(groupName);
                 break;
             }
+
             case 12: {
                 user.getProfileDetails();
                 break;
             }
+
             case 13: {
                 cout<<"Goodbye!"<<endl;
                 return 0;
             }
+
             default: {
                 cout<<"Invalid choice. Please try again."<<endl;
             }
         }
     }
+
     return 0;
 }
